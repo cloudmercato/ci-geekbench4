@@ -8,6 +8,8 @@ steps:
 - name: Run
   image: python
   commands:
+  - git submodule sync
+  - git submodule update --init --recursive
   - ci-base/install.sh drone
   - ./install.sh drone
   - ./run.sh
