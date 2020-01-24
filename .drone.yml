@@ -1,0 +1,13 @@
+kind: pipeline
+type: docker
+name: AMD64
+platform:
+  arch: amd64
+
+steps:
+- name: Run
+  image: python
+  commands:
+  - ci-base/install.sh drone
+  - ./install.sh drone
+  - ./run.sh

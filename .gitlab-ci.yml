@@ -5,6 +5,9 @@ variables:
 Job:
   image: python:3.8
   before_script:
+    - git submodule sync
+    - git submodule update --init --recursive
+
     - ci-base/install.sh gitlabci
     - ./install.sh gitlabci
   script:
