@@ -8,6 +8,25 @@ steps:
 - name: Run
   image: python
   commands:
+  - git submodule sync
+  - git submodule update --init --recursive
   - ci-base/install.sh drone
   - ./install.sh drone
   - ./run.sh
+  environment:
+    MASTER_URL:
+      from_secret: MASTER_URL
+    TOKEN:
+      from_secret: TOKEN
+    PROVIDER_ID:
+      from_secret: PROVIDER_ID
+    DATACENTER_ID:
+      from_secret: DATACENTER_ID
+    AMD64_DOCKER_LINUX_IMAGE_ID:
+      from_secret: AMD64_DOCKER_LINUX_IMAGE_ID
+    AMD64_DOCKER_FLAVOR_ID:
+      from_secret: AMD64_DOCKER_FLAVOR_ID
+    geekbench_email:
+      from_secret: geekbench_email
+    geekbench_key:
+      from_secret: geekbench_key
