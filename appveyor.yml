@@ -1,0 +1,55 @@
+version: 1.0.{build}
+skip_tags: true
+skip_branch_with_pr: true
+image:
+- Ubuntu1804
+- macOS-Mojave
+
+clone_depth: 3
+
+environment:
+  PROVIDER_ID:
+    secure: b/ndmCLZIjAH+/Bw8rhJVA==
+  DATACENTER_ID:
+    secure: jxjkpRlNfsEx+9exEc81lg==
+  TOKEN:
+    secure: 5wLsR2vrWWQTGWBOd9U2KEb2xXsSPllJuHfGQH3lr456fflM50TsJco8rIwAZTrX
+  MASTER_URL:
+    secure: vzjAmYRfNzfFfq3XN4VE8fwrzjsfNve6NP9fvBq4Udjf455Z/4/L+2F9NoejiphP
+  UBUNTU_1804:
+    secure: hBJRiidP/scpezixrpHJjA==
+  MACOS_MOJAVE:
+    secure: afiuyQN71LVaJ8JZIXBnhQ==
+  LINUX_FLAVOR_ID:
+    secure: xdAtGUcsc3sU+aV7QTHnuA==
+  MACOS_FLAVOR_ID:
+    secure: VktpvgecYpDtWmH44qkupA==
+  geekbench_email:
+    secure: ROyT55IPn+son6EC74QWc5DCvAb37cuhREgY0zrek2k=
+  geekbench_key:
+    secure: DDxtQOKKT684X93djceZXAls4fN92hpiEtmfsjTisdmKZmtVMuupQrvxLITn3yzycl+ld0n50UeGegS+cmCo7w==
+
+install:
+- sh: ./appveyor_setup.sh
+
+for:
+-
+  matrix:
+    only:
+      - image: Ubuntu1804
+  environment:
+    IMAGE: Ubuntu1804
+    FLAVOR: linux
+-
+  matrix:
+    only:
+      - image: macOS-Mojave
+  environment:
+    IMAGE: macOS-Mojave
+    FLAVOR: macos
+
+build:
+  verbosity: minimal
+
+test_script:
+- sh: ./run.sh
